@@ -24,7 +24,8 @@ var currentQuestionIndex = 0;
 
 var answerClicked = function (event) {
     if (event.target.textContent === questions[currentQuestionIndex].answer) {
-        window.alert("correct!")
+        currentQuestionIndex++;
+        displayQuestion (questions[currentQuestionIndex])
     }
     else {
         window.alert("wrong")

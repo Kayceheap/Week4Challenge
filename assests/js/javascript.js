@@ -27,6 +27,8 @@ var answerClicked = function (event) {
         currentQuestionIndex++;
         displayQuestion (questions[currentQuestionIndex])
     }
+    
+    // if wrong deduct time by 5 seconds
     else {
         window.alert("wrong")
     }
@@ -37,6 +39,10 @@ questionList.addEventListener("click", answerClicked);
 
 var displayQuestion = function (question) {
     var questionParent = document.querySelector("#questionList");
+    // delete any children if they exist
+    while (questionParent.lastChild) {
+        questionParent.removeChild(questionParent.lastChild);
+    }
     var questionText = document.createElement("div");
     questionText.textContent = question.question;
     questionParent.appendChild(questionText);

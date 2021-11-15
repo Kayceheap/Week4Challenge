@@ -19,15 +19,20 @@ var questions = [
 var currentQuestionIndex = 0;
 
 
+// show correct and append in new div
+var rightWrong = document.querySelector("#answerResult")
 
-
-
+var clearRightWrong = function () {
+    rightWrong.textContent = "";
+}
 var answerClicked = function (event) {
     if (event.target.textContent === questions[currentQuestionIndex].answer) {
+        rightWrong.textContent = "Correct!";
+        setTimeout(clearRightWrong, 1000);
         currentQuestionIndex++;
-        displayQuestion (questions[currentQuestionIndex])
+        displayQuestion(questions[currentQuestionIndex])
     }
-    
+
     // if wrong deduct time by 5 seconds
     else {
         window.alert("wrong")

@@ -8,3 +8,22 @@ header {
      flex-direction: column;
      
  }
+
+ .hidden {
+     display: none;
+ }
+
+ .main-content {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+
+ 
+
+ #answerResult {
+     width: 150px;
+     color: rgb(151, 149, 149);
+     margin: 50px;
+ }

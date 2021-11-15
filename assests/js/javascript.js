@@ -61,6 +61,7 @@ var displayQuestion = function (question) {
     questionParent.appendChild(questionText);
 
     var currentOptions = question.options;
+    // add ordered list
     var orderedList = document.createElement ("ol");
     questionParent.appendChild(orderedList);
     for (var i = 0; i < currentOptions.length; i++) {
@@ -69,9 +70,6 @@ var displayQuestion = function (question) {
         orderedList.appendChild(optionBox);
     }
 }
-
-
-
 
 var startButton = document.querySelector("#quizStart");
 
@@ -82,8 +80,11 @@ var updateTimer = function () {
 }
 
 var startQuiz = function (event) {
+    // make the start button go away after its been clicked
+    startButton.className = "hidden";
 
-
+var rules = document.querySelector("#rules");
+    rules.className = "hidden";
 
     var interval = setInterval(updateTimer, 1000);
 
@@ -93,4 +94,5 @@ var startQuiz = function (event) {
     displayQuestion(currentQuestion);
 }
 startButton.addEventListener("click", startQuiz);
+
 

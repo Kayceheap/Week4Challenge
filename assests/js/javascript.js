@@ -57,6 +57,7 @@ var displayQuestion = function (question) {
         questionParent.removeChild(questionParent.lastChild);
     }
     var questionText = document.createElement("div");
+    questionText.className = "questionFont"
     questionText.textContent = question.question;
     questionParent.appendChild(questionText);
 

@@ -19,11 +19,46 @@ header {
      align-items: center;
  }
 
+ .high-score {
+     color: green;
+ }
 
+#quizStart {
+    background-color: green;
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: white;
+}
  
 
+
  #answerResult {
+     font-size: 30px;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      width: 150px;
      color: rgb(151, 149, 149);
      margin: 50px;
+ }
+
+ li {
+     font-weight: bolder;
+     font-size: 20px;
+     color: white;
+     padding: 10px;
+     background-color: red;
+     margin: 10px;
+ }
+
+ ol {
+     list-style-position: inside;
+     margin: 0;
+     padding: 0;
+ }
+
+ .questionFont {
+     font-size: 30px;
+     font-weight: bolder;
  }

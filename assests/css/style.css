@@ -1,0 +1,10 @@
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+ #questionList {
+     display: flex;
+     flex-direction: column;
+     
+ }

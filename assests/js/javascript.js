@@ -19,6 +19,9 @@ var questions = [
 var currentQuestionIndex = 0;
 
 
+var timeLeft = 60;
+
+
 // show correct and append in new div
 var rightWrong = document.querySelector("#answerResult")
 
@@ -30,12 +33,17 @@ var answerClicked = function (event) {
         rightWrong.textContent = "Correct!";
         setTimeout(clearRightWrong, 1000);
         currentQuestionIndex++;
-        displayQuestion(questions[currentQuestionIndex])
+        displayQuestion(questions[currentQuestionIndex]);
     }
 
     // if wrong deduct time by 5 seconds
     else {
-        window.alert("wrong")
+        timeLeft = timeLeft -5;
+        rightWrong.textContent = "Wrong!";
+        setTimeout(clearRightWrong, 1000);
+        currentQuestionIndex++;
+        displayQuestion(questions[currentQuestionIndex]);
+        
     }
 
 }
@@ -53,16 +61,17 @@ var displayQuestion = function (question) {
     questionParent.appendChild(questionText);
 
     var currentOptions = question.options;
+    var orderedList = document.createElement ("ol");
+    questionParent.appendChild(orderedList);
     for (var i = 0; i < currentOptions.length; i++) {
-        var optionBox = document.createElement("div");
+        var optionBox = document.createElement("li");
         optionBox.textContent = currentOptions[i];
-        questionParent.appendChild(optionBox);
+        orderedList.appendChild(optionBox);
     }
 }
 
 
 
-var timeLeft = 60;
 
 var startButton = document.querySelector("#quizStart");
 

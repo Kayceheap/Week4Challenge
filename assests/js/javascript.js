@@ -18,6 +18,7 @@ var questions = [
 
 var currentQuestionIndex = 0;
 
+var score = 0;
 
 var timeLeft = 60;
 
@@ -31,6 +32,9 @@ var clearRightWrong = function () {
 var answerClicked = function (event) {
     if (event.target.textContent === questions[currentQuestionIndex].answer) {
         rightWrong.textContent = "Correct!";
+        // adding 10 points to every correct answer
+        score += 10;
+        console.log(score);
         setTimeout(clearRightWrong, 1000);
         currentQuestionIndex++;
         displayQuestion(questions[currentQuestionIndex]);

@@ -34,14 +34,15 @@ var displayHighScores = function (event) {
         return;
     }
     scoresLocalStorage = JSON.parse(scoresLocalStorage);
-    for(var i = 0; i < scoresLocalStorage.length; i++) {
-        var scoreEl = document.createElement ("p");
+    for (var i = 0; i < scoresLocalStorage.length; i++) {
+        var scoreEl = document.createElement("p");
+        scoreEl.className = "green";
         scoreEl.textContent = scoresLocalStorage[i].name + " " + scoresLocalStorage[i].score;
         questionParent.appendChild(scoreEl);
     }
 }
 
-var viewHighScores = document.querySelector ("#viewHighScores");
+var viewHighScores = document.querySelector("#viewHighScores");
 viewHighScores.addEventListener("click", displayHighScores)
 
 
@@ -53,46 +54,46 @@ var clearRightWrong = function () {
 
 }
 var saveScore = function (event) {
-   // save to local storage
-   var highScores = window.localStorage.getItem ("highScore");
-   if (highScores === null) {
-       highScores = [];
-   }
-   else {
-       highScores = JSON.parse(highScores);
-   }
-   var nameValue = document.querySelector("input").value;
-   var newScore = {
-       name: nameValue, score: score
-   }
-   highScores.push (newScore)
+    // save to local storage
+    var highScores = window.localStorage.getItem("highScore");
+    if (highScores === null) {
+        highScores = [];
+    }
+    else {
+        highScores = JSON.parse(highScores);
+    }
+    var nameValue = document.querySelector("input").value;
+    var newScore = {
+        name: nameValue, score: score
+    }
+    highScores.push(newScore)
 
-   window.localStorage.setItem ("highScore", JSON.stringify(highScores));
-
+    window.localStorage.setItem("highScore", JSON.stringify(highScores));
+    displayHighScores();
 }
-var displayEndGame = function() {
+var displayEndGame = function () {
     while (questionParent.lastChild) {
         questionParent.removeChild(questionParent.lastChild);
     }
-    var parentEndGame = document.createElement ("div");
+    var parentEndGame = document.createElement("div");
     questionParent.appendChild(parentEndGame);
-    var allDoneEl = document.createElement ("h2");
+    var allDoneEl = document.createElement("h2");
     allDoneEl.textContent = "All Done!";
-    parentEndGame.appendChild (allDoneEl); 
+    parentEndGame.appendChild(allDoneEl);
     // create score element
-    var scoreLableEl = document.createElement ("p");
+    var scoreLableEl = document.createElement("p");
     //scoreLableEl.textContent = "Your Score: ";
     scoreLableEl.innerHTML = "Your Score:  <span>" + score + "</span>"
     parentEndGame.appendChild(scoreLableEl);
-    
-    var enterInitialsEl = document.createElement ("input");
-    enterInitialsEl.setAttribute ("type", "text") 
-    enterInitialsEl.setAttribute ("placeHolder", "Enter Initials Here");
+
+    var enterInitialsEl = document.createElement("input");
+    enterInitialsEl.setAttribute("type", "text")
+    enterInitialsEl.setAttribute("placeHolder", "Enter Initials Here");
     parentEndGame.appendChild(enterInitialsEl);
-    var saveButton = document.createElement ("button");
+    var saveButton = document.createElement("button");
     parentEndGame.appendChild(saveButton);
     saveButton.textContent = "Save Score";
-    saveButton.addEventListener ("click", saveScore);
+    saveButton.addEventListener("click", saveScore);
 }
 
 var answerClicked = function (event) {
@@ -105,7 +106,7 @@ var answerClicked = function (event) {
         score += 10;
         console.log(score);
         setTimeout(clearRightWrong, 1000);
-        if (questions.length -1 === currentQuestionIndex) {
+        if (questions.length - 1 === currentQuestionIndex) {
             displayEndGame();
             return;
         }
@@ -115,16 +116,16 @@ var answerClicked = function (event) {
 
     // if wrong deduct time by 5 seconds
     else {
-        timeLeft = timeLeft -5;
+        timeLeft = timeLeft - 5;
         rightWrong.textContent = "Wrong!";
         setTimeout(clearRightWrong, 1000);
-        if (questions.length -1 === currentQuestionIndex) {
+        if (questions.length - 1 === currentQuestionIndex) {
             displayEndGame();
             return;
         }
         currentQuestionIndex++;
         displayQuestion(questions[currentQuestionIndex]);
-        
+
     }
 
 }
@@ -132,7 +133,7 @@ var questionList = document.querySelector("#questionList");
 questionList.addEventListener("click", answerClicked);
 
 var displayQuestion = function (question) {
-    
+
     // delete any children if they exist
     while (questionParent.lastChild) {
         questionParent.removeChild(questionParent.lastChild);
@@ -144,7 +145,7 @@ var displayQuestion = function (question) {
 
     var currentOptions = question.options;
     // add ordered list
-    var orderedList = document.createElement ("ol");
+    var orderedList = document.createElement("ol");
     questionParent.appendChild(orderedList);
     for (var i = 0; i < currentOptions.length; i++) {
         var optionBox = document.createElement("li");
@@ -157,15 +158,23 @@ var startButton = document.querySelector("#quizStart");
 
 var updateTimer = function () {
     var timerStart = document.querySelector("#timer");
-    timerStart.textContent = timeLeft;
+    if (timeLeft <= 0) {
+        timerStart.textContent = 0;
+    }
+    else {
+        timerStart.textContent = timeLeft;
+    }
     timeLeft--;
+    if (timeLeft === 0) {
+        displayEndGame();
+    }
 }
 
 var startQuiz = function (event) {
     // make the start button go away after its been clicked
     startButton.className = "hidden";
 
-var rules = document.querySelector("#rules");
+    var rules = document.querySelector("#rules");
     rules.className = "hidden";
 
     var interval = setInterval(updateTimer, 1000);
